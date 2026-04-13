@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Ramírez · Ingeniera en Desarrollo de Software</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rosa-claro: #fce4ec;
+    --rosa-medio: #f8bbd0;
+    --rosa-fuerte: #e91e8c;
+    --rosa-oscuro: #c2185b;
+    --vino: #880e4f;
+    --blanco: #ffffff;
+    --gris-suave: #fdf6f9;
+    --texto: #4a1a30;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    color: var(--texto);
+    background: var(--blanco);
+    line-height: 1.7;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rosa-medio);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--vino);
+    font-style: italic;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--rosa-oscuro);
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rosa-fuerte); }
+
+  /* ── HERO ── */
+  #inicio {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #fff5f8 0%, #fce4ec 45%, #fdf0f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #inicio::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(233,30,140,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px;
+  }
+
+  #inicio::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(194,24,91,0.07) 0%, transparent 70%);
+    bottom: -80px; left: -80px;
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 780px; }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--rosa-claro);
+    border: 1px solid var(--rosa-medio);
+    color: var(--rosa-oscuro);
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    color: var(--vino);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .hero-name span {
+    color: var(--rosa-fuerte);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--rosa-oscuro);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: #6d2a45;
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--rosa-fuerte);
+    color: white;
+    padding: 12px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.15s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .btn-primary:hover { background: var(--rosa-oscuro); transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 1.5px solid var(--rosa-fuerte);
+    color: var(--rosa-fuerte);
+    padding: 12px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all 0.2s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .btn-outline:hover { background: var(--rosa-claro); transform: translateY(-2px); }
+
+  .hero-skills {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+
+  .skill-chip {
+    background: white;
+    border: 1px solid var(--rosa-medio);
+    color: var(--vino);
+    font-size: 0.78rem;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SECCIONES GENERALES ── */
+  section { padding: 6rem 2rem; }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rosa-fuerte);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--vino);
+    text-align: center;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 2px;
+    background: var(--rosa-fuerte);
+    margin: 0 auto 3.5rem;
+    border-radius: 2px;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ── PORTAFOLIO ── */
+  #portafolio { background: var(--gris-suave); }
+
+  .proyectos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .proyecto-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--rosa-medio);
+    padding: 1.8rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .proyecto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(233,30,140,0.1);
+  }
+
+  .proyecto-fecha {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rosa-fuerte);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .proyecto-nombre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--vino);
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+  }
+
+  .proyecto-desc {
+    font-size: 0.9rem;
+    color: #6d2a45;
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+  }
+
+  .proyecto-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    background: var(--rosa-claro);
+    color: var(--rosa-oscuro);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .proyecto-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--rosa-fuerte);
+    font-size: 0.82rem;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .proyecto-link:hover { border-color: var(--rosa-fuerte); }
+
+  /* ── ACERCA DE MÍ ── */
+  .acerca-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .acerca-avatar {
+    background: linear-gradient(135deg, var(--rosa-claro), var(--rosa-medio));
+    border-radius: 24px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--rosa-medio);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-iniciales {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--rosa-oscuro);
+    font-style: italic;
+    opacity: 0.6;
+  }
+
+  .acerca-texto .section-label,
+  .acerca-texto .section-title { text-align: left; }
+
+  .acerca-texto .section-line { margin-left: 0; }
+
+  .acerca-bio {
+    font-size: 0.95rem;
+    color: #5a2035;
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+
+  .habilidades-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--vino);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+
+  .habilidades-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.2rem; }
+
+  .chip-tech {
+    background: var(--rosa-claro);
+    border: 1px solid var(--rosa-medio);
+    color: var(--vino);
+    font-size: 0.8rem;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-weight: 700;
+  }
+
+  .chip-soft {
+    background: white;
+    border: 1px solid var(--rosa-medio);
+    color: var(--rosa-oscuro);
+    font-size: 0.8rem;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-weight: 400;
+  }
+
+  /* ── CV / EXPERIENCIA ── */
+  #cv { background: var(--gris-suave); }
+
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .cv-col-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--vino);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid var(--rosa-medio);
+    font-style: italic;
+  }
+
+  .cv-item { margin-bottom: 1.8rem; position: relative; padding-left: 1.2rem; }
+
+  .cv-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 6px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--rosa-fuerte);
+  }
+
+  .cv-empresa {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rosa-fuerte);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .cv-puesto {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--vino);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .cv-fecha {
+    font-size: 0.78rem;
+    color: #9e6070;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+  }
+
+  .cv-desc {
+    font-size: 0.88rem;
+    color: #5a2035;
+    line-height: 1.7;
+  }
+
+  /* ── CONTACTO ── */
+  #contacto {
+    background: linear-gradient(135deg, var(--vino) 0%, #ad1457 50%, var(--rosa-oscuro) 100%);
+    text-align: center;
+  }
+
+  #contacto .section-label { color: var(--rosa-medio); }
+  #contacto .section-title { color: white; }
+  #contacto .section-line { background: var(--rosa-medio); }
+
+  .contacto-desc {
+    color: rgba(255,255,255,0.8);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    font-size: 1rem;
+  }
+
+  .contacto-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .contacto-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .contacto-link:hover { background: rgba(255,255,255,0.22); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--vino);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .acerca-grid { grid-template-columns: 1fr; }
+    .acerca-avatar { max-width: 220px; margin: 0 auto; }
+    .cv-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <span class="nav-logo">Diana Ramírez</span>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#portafolio">Portafolio</a></li>
+    <li><a href="#acerca">Acerca de mí</a></li>
+    <li><a href="#cv">Experiencia</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- INICIO / HERO -->
+<section id="inicio">
+  <div class="hero-inner">
+    <span class="hero-tag">✦ Bienvenida a mi portafolio ✦</span>
+    <h1 class="hero-name">Diana <span>Ramírez</span></h1>
+    <p class="hero-subtitle">Ingeniera en Desarrollo de Software</p>
+    <p class="hero-desc">Apasionada por resolver desafíos complejos mediante soluciones tecnológicas innovadoras. Experiencia en desarrollo web de extremo a extremo con enfoque en Java y bases de datos.</p>
+    <div class="hero-btns">
+      <a href="#portafolio" class="btn-primary">Ver mis proyectos</a>
+      <a href="#contacto" class="btn-outline">Contáctame</a>
+    </div>
+    <div class="hero-skills">
+      <span class="skill-chip">Java</span>
+      <span class="skill-chip">PHP</span>
+      <span class="skill-chip">MySQL</span>
+      <span class="skill-chip">JavaScript</span>
+      <span class="skill-chip">CSS</span>
+      <span class="skill-chip">C#</span>
+      <span class="skill-chip">Microservicios</span>
+      <span class="skill-chip">GitHub</span>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="container">
+    <p class="section-label">✦ Mis trabajos</p>
+    <h2 class="section-title">Portafolio</h2>
+    <div class="section-line"></div>
+    <div class="proyectos-grid">
+
+      <div class="proyecto-card">
+        <p class="proyecto-fecha">Marzo 2026</p>
+        <h3 class="proyecto-nombre">Hackaton · Landing Page E-commerce</h3>
+        <p class="proyecto-desc">Interfaz mobile-first con estilo Dark Mode y Neón. Incluye validación de formularios, renderizado dinámico mediante objetos y efectos de revelado con Intersection Observer API.</p>
+        <div class="proyecto-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Mobile-first</span>
+        </div>
+        <a href="https://github.com/dianaramm" class="proyecto-link">Ver en GitHub →</a>
+      </div>
+
+      <div class="proyecto-card">
+        <p class="proyecto-fecha">Diciembre 2025</p>
+        <h3 class="proyecto-nombre">Sistema Web Híbrido Escolar</h3>
+        <p class="proyecto-desc">Desarrollo Full Stack de sistema web escolar. Arquitectura integral con MySQL, lógica de negocio en PHP y API Endpoints para sincronización de datos en tiempo real con aplicación móvil.</p>
+        <div class="proyecto-tags">
+          <span class="tag">PHP</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">API REST</span>
+        </div>
+        <a href="https://github.com/dianaramm" class="proyecto-link">Ver en GitHub →</a>
+      </div>
+
+      <div class="proyecto-card">
+        <p class="proyecto-fecha">Proyecto académico</p>
+        <h3 class="proyecto-nombre">Sistema de Inventario · Java</h3>
+        <p class="proyecto-desc">Gestión de usuarios con altas y bajas, conexión a MySQL, generación de reportes y manejo de excepciones. Aplicación de escritorio con interfaz intuitiva.</p>
+        <div class="proyecto-tags">
+          <span class="tag">Java</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JDBC</span>
+        </div>
+        <a href="https://github.com/dianaramm/inventario-java" class="proyecto-link">Ver en GitHub →</a>
+      </div>
+
+      <div class="proyecto-card">
+        <p class="proyecto-fecha">Proyecto académico</p>
+        <h3 class="proyecto-nombre">Sistema de Cine · Java</h3>
+        <p class="proyecto-desc">Sala de cine con generación aleatoria de boletos usando clases Swing y Random. Generación de reportes en formato TXT y manejo de reservaciones.</p>
+        <div class="proyecto-tags">
+          <span class="tag">Java</span>
+          <span class="tag">Swing</span>
+          <span class="tag">POO</span>
+        </div>
+        <a href="https://github.com/dianaramm/cine-java" class="proyecto-link">Ver en GitHub →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACERCA DE MÍ -->
+<section id="acerca">
+  <div class="container">
+    <div class="acerca-grid">
+      <div class="acerca-avatar">
+        <span class="avatar-iniciales">DR</span>
+      </div>
+      <div class="acerca-texto">
+        <p class="section-label">✦ Sobre mí</p>
+        <h2 class="section-title">Acerca de mí</h2>
+        <div class="section-line"></div>
+        <p class="acerca-bio">Soy Ingeniera en Desarrollo de Software, apasionada por resolver desafíos complejos mediante soluciones tecnológicas innovadoras. Cuento con experiencia sólida en el desarrollo de aplicaciones web de extremo a extremo, con especial enfoque en el ecosistema Java y tecnologías de soluciones financieras.</p>
+        <p class="acerca-bio">Me caracterizo por mi capacidad analítica, adaptabilidad tecnológica y un enfoque orientado a resultados. Disfruto aprender continuamente y trabajar en equipo para impulsar la eficiencia y competitividad de los proyectos en los que participo.</p>
+
+        <p class="habilidades-titulo">Habilidades técnicas</p>
+        <div class="habilidades-chips">
+          <span class="chip-tech">Java</span>
+          <span class="chip-tech">JavaScript</span>
+          <span class="chip-tech">PHP</span>
+          <span class="chip-tech">MySQL</span>
+          <span class="chip-tech">C#</span>
+          <span class="chip-tech">CSS</span>
+          <span class="chip-tech">Microservicios</span>
+          <span class="chip-tech">GitHub</span>
+        </div>
+
+        <p class="habilidades-titulo">Habilidades blandas</p>
+        <div class="habilidades-chips">
+          <span class="chip-soft">Comunicación efectiva</span>
+          <span class="chip-soft">Trabajo en equipo</span>
+          <span class="chip-soft">Pensamiento analítico</span>
+          <span class="chip-soft">Adaptación</span>
+          <span class="chip-soft">Aprendizaje constante</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA Y FORMACIÓN -->
+<section id="cv">
+  <div class="container">
+    <p class="section-label">✦ Mi trayectoria</p>
+    <h2 class="section-title">Experiencia y Formación</h2>
+    <div class="section-line"></div>
+    <div class="cv-grid">
+
+      <div>
+        <p class="cv-col-titulo">Experiencia laboral</p>
+
+        <div class="cv-item">
+          <p class="cv-empresa">Empresa de Soluciones Financieras</p>
+          <p class="cv-puesto">Full Stack Developer</p>
+          <p class="cv-fecha">Mayo 2025 – Diciembre 2025</p>
+          <p class="cv-desc">Diseñé e implementé un módulo de autenticación robusto. Desarrollé módulos de gestión de pagos y ejecuté migraciones de bases de datos garantizando la integridad de la información financiera.</p>
+        </div>
+
+        <div class="cv-item">
+          <p class="cv-empresa">Centro Comunitario Juan Diego</p>
+          <p class="cv-puesto">Full Stack Developer</p>
+          <p class="cv-fecha">Junio 2024 – Junio 2025</p>
+          <p class="cv-desc">Implementé un sistema integral de gestión de usuarios con PHP, MySQL y JavaScript. Automaticé reportes financieros reduciendo un 40% los tiempos operativos.</p>
+        </div>
+
+        <div class="cv-item">
+          <p class="cv-empresa">PLAST</p>
+          <p class="cv-puesto">Analista de Inventarios</p>
+          <p class="cv-fecha">Mayo 2020 – Junio 2024</p>
+          <p class="cv-desc">Monitoreo y conciliación de bases de datos de inventario con funciones avanzadas de Excel. Generación de reportes de estado de almacén para planificación y reposición de stock.</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="cv-col-titulo">Formación</p>
+
+        <div class="cv-item">
+          <p class="cv-empresa">UnADM</p>
+          <p class="cv-puesto">Ingeniería en Desarrollo de Software</p>
+          <p class="cv-fecha">Enero 2019 – Diciembre 2025</p>
+        </div>
+
+        <div class="cv-item">
+          <p class="cv-empresa">Generation México</p>
+          <p class="cv-puesto">Bootcamp Desarrollador Java Full Stack Jr.</p>
+          <p class="cv-fecha">Febrero 2026 – En curso</p>
+        </div>
+
+        <div class="cv-item">
+          <p class="cv-empresa">Pilares</p>
+          <p class="cv-puesto">Certificación Desarrollador Java Junior</p>
+          <p class="cv-fecha">2025</p>
+        </div>
+
+        <p class="cv-col-titulo" style="margin-top:2rem;">Idiomas</p>
+        <div class="cv-item">
+          <p class="cv-puesto">Inglés — Nivel A1</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <p class="section-label">✦ Hablemos</p>
+    <h2 class="section-title" style="color:white;">Contacto</h2>
+    <div class="section-line" style="background:rgba(255,255,255,0.4);"></div>
+    <p class="contacto-desc">Estoy abierta a nuevas oportunidades. No dudes en escribirme.</p>
+    <div class="contacto-links">
+      <a href="mailto:dnuniviana@gmail.com" class="contacto-link">✉ dnuniviana@gmail.com</a>
+      <a href="https://linkedin.com/in/diana-ramirez" target="_blank" class="contacto-link">in LinkedIn</a>
+      <a href="https://github.com/dianaramm" target="_blank" class="contacto-link">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Diana Ramírez &nbsp;·&nbsp; Ingeniera en Desarrollo de Software &nbsp;·&nbsp; 2026</p>
+</footer>
+
+</body>
+</html>
